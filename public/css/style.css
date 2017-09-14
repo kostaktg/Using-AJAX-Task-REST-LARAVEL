@@ -1,0 +1,19 @@
+.body-panel{
+
+	background-color: #e8e8e8; 
+}
+
+.login-body-panel{
+	background-color: black
+}
+
+.title-my{
+	color: white;
+}
+
+.btn-my{
+	color: black;
+	font-weight: bold;
+	background-color: #daca40;
+	width: 80%;
+}

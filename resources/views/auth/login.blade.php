@@ -7,10 +7,10 @@
             <div class="panel panel-default">
                 
 
-                <div class="panel-body" style="background-color: black">
+                <div class="panel-body login-body-panel">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
-                        <h1 class="text-center" style="color: white">Sign In</h1>
+                        <h1 class="text-center title-my" >Sign In</h1>
 <div class="row">
                       
                            

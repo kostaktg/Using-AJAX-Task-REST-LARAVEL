@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Welcome</div>
+                
 
                 <div class="col-md-8 col-md-offset-2">
                     <table class="table table-hover">
@@ -25,8 +26,7 @@
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->created_at }}</td>
                       <td><a href="{{route('del',$user->id)}}">delete</a>
-                      <input class="click" type="button"  value="ajax">
-                      <input  type="hidden" id="id" value="{{ $user->id }}"> </td>
+                      </td>
                   </tr>
 
                   @endforeach
@@ -54,46 +54,5 @@
 </div>
 
 
-<script type="text/javascript">
 
-
-
-
-
-
-
-  $(function(){
-
-    $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-    
-
-    $('.click').click(function(){
-      var id = $('#id').val();
-
-      $.ajax({
-       url  : "{{action('HomeController@del')}}",
-       type : "POST",
-       async: false,
-       data : {
-                'id'  : id
-       },
-       success:function(re)
-       {
-        alert(re)
-        $('#id').val('');
-       }
-
-
-      });
-    });
-  
-
-});
-
-</script>
 @endsection
