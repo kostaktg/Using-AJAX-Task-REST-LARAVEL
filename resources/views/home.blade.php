@@ -24,13 +24,19 @@
                       <th scope="row">{{ $user->name }}</th>
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->created_at }}</td>
-                      <td><a href="{{route('del',$user->id)}}">delete</a></td>
+                      <td><a href="{{route('del',$user->id)}}">delete</a>
+                      <input class="click" type="button"  value="ajax">
+                      <input  type="hidden" id="id" value="{{ $user->id }}"> </td>
                   </tr>
 
                   @endforeach
                   
               </tbody>
           </table>
+
+
+
+
       </div>
 
       <div class="panel-body">
@@ -46,4 +52,48 @@
 </div>
 </div>
 </div>
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+  $(function(){
+
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+    
+
+    $('.click').click(function(){
+      var id = $('#id').val();
+
+      $.ajax({
+       url  : "{{action('HomeController@del')}}",
+       type : "POST",
+       async: false,
+       data : {
+                'id'  : id
+       },
+       success:function(re)
+       {
+        alert(re)
+        $('#id').val('');
+       }
+
+
+      });
+    });
+  
+
+});
+
+</script>
 @endsection

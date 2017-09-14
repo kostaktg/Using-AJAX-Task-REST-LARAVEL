@@ -28,6 +28,12 @@ class HomeController extends Controller
         return view('home', compact('users'));
     }
 
+       public function ind()
+    {
+        $users = User::All();
+        return view('home', compact('users'));
+    }
+
 
     public function delete($id)
     {
@@ -35,6 +41,17 @@ class HomeController extends Controller
         $query->delete();
 
         return back();
+    }
+
+     public function del(Request $request)
+    {
+$post = $request->all();
+$id = $post['id'];
+
+        $query = User::find($id);
+        $query->delete();
+
+        
     }
 
 
