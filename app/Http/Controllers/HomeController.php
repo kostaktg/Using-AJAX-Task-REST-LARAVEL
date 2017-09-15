@@ -22,8 +22,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax())
+         {
+          $user = User::All();
+        return response($user);
+
+        }
+
         $users = User::All();
         return view('home', compact('users'));
     }

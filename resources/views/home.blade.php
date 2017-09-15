@@ -20,16 +20,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                  @foreach($users as $user)
-<tr>
-                      <th scope="row">{{ $user->name }}</th>
-                      <td>{{ $user->email }}</td>
-                      <td>{{ $user->created_at }}</td>
-                      <td><a href="{{route('del',$user->id)}}">delete</a>
-                      </td>
-                  </tr>
-
-                  @endforeach
+                 
                   
               </tbody>
           </table>
@@ -53,6 +44,54 @@
 </div>
 </div>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    loadScore()
+  })
 
+  //ceate function loadScore
+
+function loadScore()
+{
+  $.ajax({
+    type  :  'get',
+    url   :  "{{url('home')}}",
+    
+    dataType : 'json',
+    success:function(data)
+    {
+
+      $('tbody').empty();
+      $.each(data,function(i,user){
+        
+        //show to table
+        var row = $('<tr/>');
+        row.append($('<td/>',{
+          text : user.id,
+        })).append($('<td/>',{
+          text : user.name,
+        })).append($('<td/>',{
+          text : user.created_at,
+        })).append($('<td/>',{
+        })).append($('<a>',{
+          href : "delete/".concat(user.id),
+          text : "delete",
+        }))
+
+        //---- append to body
+
+        $('tbody').append(row);
+
+      })
+
+
+
+        
+
+      }
+    
+  })
+}
+</script>
 
 @endsection
