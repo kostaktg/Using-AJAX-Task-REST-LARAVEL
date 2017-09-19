@@ -25,7 +25,7 @@
               </tbody>
           </table>
 
-
+<input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
 
 
       </div>
@@ -45,6 +45,41 @@
 </div>
 
 <script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+
+
+
+
+function deleteMember(i)
+{
+  var token = document.getElementById('_token').value;
+
+
+  $.ajax({
+    type : 'post',
+    url  : "{{ route('delete') }}",
+    dataType: "json",
+    data:{
+      'id': i,
+      '_token':token
+    },
+    success: function(data){
+      console.log(data);
+      if(data.status == 'error'){
+        alert('error');
+      }else{
+        alert('success');
+      }
+    }
+  });
+}
+
   $(document).ready(function(){
     loadScore()
   })
@@ -74,7 +109,8 @@ function loadScore()
           text : user.created_at,
         })).append($('<td/>',{
         })).append($('<a>',{
-          href : "delete/".concat(user.id),
+          href : "#",
+          onclick : "deleteMember(".concat(user.id).concat(")"),
           text : "delete",
         }))
 

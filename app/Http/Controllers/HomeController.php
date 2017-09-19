@@ -38,12 +38,23 @@ class HomeController extends Controller
 
 
 
-    public function delete($id)
+    public function delete()
     {
+        
+        $id  = $_POST['id'];
+
+
         $query = User::find($id);
         $query->delete();
 
-        return back();
+        if($query){
+            return response()->json([
+                'status' => 'success']);
+        }else{
+            return response()->json([
+                'status' => 'error']);
+
+        }
     }
 
 
