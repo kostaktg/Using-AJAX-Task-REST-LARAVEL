@@ -74,10 +74,12 @@ function deleteMember(i)
       if(data.status == 'error'){
         alert('error');
       }else{
-        alert('success');
+        alert('Data was deleted');
       }
     }
   });
+  var row = document.getElementById("row"+i);
+  row.parentNode.removeChild(row);
 }
 
   $(document).ready(function(){
@@ -100,7 +102,9 @@ function loadScore()
       $.each(data,function(i,user){
         
         //show to table
-        var row = $('<tr/>');
+        var row = $('<tr/>',{
+          id : "row".concat(user.id),
+        });
         row.append($('<td/>',{
           text : user.id,
         })).append($('<td/>',{
